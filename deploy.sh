@@ -32,7 +32,7 @@ echo "Process: docker pull;";
 sudo -iu $misskey_user XDG_RUNTIME_DIR=/run/user/$misskey_user_uid DOCKER_HOST=unix:///run/user/$misskey_user_uid/docker.sock docker pull "$docker_repository";
 
 echo "Process: docker run;";
-sudo -iu $misskey_user XDG_RUNTIME_DIR=/run/user/$misskey_user_uid DOCKER_HOST=unix:///run/user/$misskey_user_uid/docker.sock docker run -d -p 3000:3000 --add-host=localhost:$host_ip -v /home/$misskey_user/misskey/files:/misskey/files -v "/home/$misskey_user/misskey/.config/default.yml":/misskey/.config/default.yml:ro --restart unless-stopped -t "$docker_repository";
+sudo -iu $misskey_user XDG_RUNTIME_DIR=/run/user/$misskey_user_uid DOCKER_HOST=unix:///run/user/$misskey_user_uid/docker.sock docker run -d -p 3000:3000 --add-host=docker_host:$host_ip -v /home/$misskey_user/misskey/files:/misskey/files -v "/home/$misskey_user/misskey/.config/default.yml":/misskey/.config/default.yml:ro --restart unless-stopped -t "$docker_repository";
 
 echo "Process: docker image prune;";
 sudo -iu $misskey_user XDG_RUNTIME_DIR=/run/user/$misskey_user_uid DOCKER_HOST=unix:///run/user/$misskey_user_uid/docker.sock docker image prune -f;

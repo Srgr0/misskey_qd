@@ -19,7 +19,7 @@ echo "Process: update packages;";
 apt update && apt upgrade -y
 
 echo "Process: docker remove;";
-sudo -iu $misskey_user docker ps -aq | xargs -r docker rm -f;
+sudo -iu misskey bash -c 'docker ps -aq | xargs -r docker rm -f'
 
 if [ -z "$registry_user" ]; then
    echo "Process: docker login: skip";
